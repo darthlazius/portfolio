@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kushagram@portfolio:~</title>
+<meta name="description" content="Cybersecurity enthusiast — portfolio of Kushagram">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ CRT OVERLAYS ============ -->
+<div class="crt-scanlines" aria-hidden="true"></div>
+<div class="crt-vignette" aria-hidden="true"></div>
+<div class="crt-flicker" aria-hidden="true"></div>
+
+<!-- ============ BOOT SEQUENCE ============ -->
+<div id="boot">
+  <pre id="boot-text"></pre>
+  <div id="boot-skip">[ PRESS ANY KEY OR CLICK TO SKIP ]</div>
+</div>
+
+<!-- ============ MATRIX RAIN (easter egg) ============ -->
+<canvas id="matrix" aria-hidden="true"></canvas>
+
+<!-- ============ ACHIEVEMENT TOASTS ============ -->
+<div id="toasts" aria-live="polite"></div>
+
+<!-- ============ MAIN SITE ============ -->
+<div id="site" class="hidden">
+
+  <!-- status bar -->
+  <header id="statusbar">
+    <span class="sb-left">root@kushagram:~#</span>
+    <nav class="sb-nav">
+      <a href="#about">whoami</a>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#blogs">blogs</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+      <a href="#" id="term-toggle" class="term-link">terminal</a>
+    </nav>
+    <span class="sb-right"><span id="clock">00:00:00</span> | <span id="ach-count">🏆 0/9</span></span>
+  </header>
+
+  <!-- hero -->
+  <section id="hero">
+    <pre id="ascii-name" title="click me...">
+ ██╗  ██╗██╗   ██╗███████╗██╗  ██╗ █████╗  ██████╗ ██████╗  █████╗ ███╗   ███╗
+ ██║ ██╔╝██║   ██║██╔════╝██║  ██║██╔══██╗██╔════╝ ██╔══██╗██╔══██╗████╗ ████║
+ █████╔╝ ██║   ██║███████╗███████║███████║██║  ███╗██████╔╝███████║██╔████╔██║
+ ██╔═██╗ ██║   ██║╚════██║██╔══██║██╔══██║██║   ██║██╔══██╗██╔══██║██║╚██╔╝██║
+ ██║  ██╗╚██████╔╝███████║██║  ██║██║  ██║╚██████╔╝██║  ██║██║  ██║██║ ╚═╝ ██║
+ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝</pre>
+    <p class="tagline">> <span id="typed-tagline"></span><span class="cursor">█</span></p>
+    <p class="hero-hint">// scroll down to decrypt files... press <kbd>`</kbd> to open the CTF terminal... or try the Konami code ;)</p>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="file-section">
+    <h2 class="file-header" data-decrypt>[FILE 01] about.enc</h2>
+    <div class="terminal-window">
+      <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> whoami — bash</div>
+      <div class="tw-body">
+        <p class="prompt-line">$ whoami</p>
+        <!-- FILL: Write your bio here. A few sentences about who you are,
+             what drives you in cybersecurity, what you're currently exploring. -->
+        <p class="redacted-block">
+          Cybersecurity enthusiast. <span class="redacted">[REDACTED — fill in your bio: who you are, what you're into, what you're hunting for]</span>
+        </p>
+        <p class="prompt-line">$ cat ./interests.txt</p>
+        <!-- FILL: list your interest areas, e.g. red teaming, malware analysis, web exploitation -->
+        <p><span class="redacted">[REDACTED — your interest areas: e.g. offensive security / reverse engineering / cloud security]</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="file-section">
+    <h2 class="file-header" data-decrypt>[FILE 02] experience.enc</h2>
+
+    <div class="terminal-window xp-card">
+      <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> oracle.log</div>
+      <div class="tw-body">
+        <p class="xp-head">
+          <span class="xp-org">ORACLE</span>
+          <!-- FILL: your role + dates at Oracle -->
+          <span class="xp-role redacted">[ROLE — fill manually]</span>
+          <span class="xp-dates redacted">[DATES]</span>
+        </p>
+        <ul class="xp-points">
+          <!-- FILL: 2–4 bullet points about what you did at Oracle -->
+          <li class="redacted">[REDACTED — what you worked on at Oracle]</li>
+          <li class="redacted">[REDACTED — impact / tech used]</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="terminal-window xp-card">
+      <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> jiostar.log</div>
+      <div class="tw-body">
+        <p class="xp-head">
+          <span class="xp-org">JIOSTAR</span>
+          <!-- FILL: your role + dates at JioStar -->
+          <span class="xp-role redacted">[ROLE — fill manually]</span>
+          <span class="xp-dates redacted">[DATES]</span>
+        </p>
+        <ul class="xp-points">
+          <!-- FILL: 2–4 bullet points about what you did at JioStar -->
+          <li class="redacted">[REDACTED — what you worked on at JioStar]</li>
+          <li class="redacted">[REDACTED — impact / tech used]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS / CTF ============ -->
+  <section id="projects" class="file-section">
+    <h2 class="file-header" data-decrypt>[FILE 03] projects.enc</h2>
+    <div class="grid">
+      <!-- FILL: duplicate this card for each project / CTF writeup -->
+      <a class="terminal-window proj-card" href="#">
+        <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> project_01.sh</div>
+        <div class="tw-body">
+          <p class="proj-name redacted">[PROJECT NAME]</p>
+          <p class="proj-desc redacted">[REDACTED — one-line description of the project or CTF challenge]</p>
+          <p class="proj-tags">#tag1 #tag2</p>
+        </div>
+      </a>
+      <a class="terminal-window proj-card" href="#">
+        <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> ctf_writeup_01.md</div>
+        <div class="tw-body">
+          <p class="proj-name redacted">[CTF WRITEUP TITLE]</p>
+          <p class="proj-desc redacted">[REDACTED — which CTF, which category, what made it fun]</p>
+          <p class="proj-tags">#pwn #web #crypto</p>
+        </div>
+      </a>
+      <a class="terminal-window proj-card" href="#">
+        <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> project_02.sh</div>
+        <div class="tw-body">
+          <p class="proj-name redacted">[PROJECT NAME]</p>
+          <p class="proj-desc redacted">[REDACTED — one-line description]</p>
+          <p class="proj-tags">#tag1 #tag2</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ BLOGS ============ -->
+  <section id="blogs" class="file-section">
+    <h2 class="file-header" data-decrypt>[FILE 04] blogs.enc</h2>
+    <div class="terminal-window">
+      <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> ls -la ./blogs</div>
+      <div class="tw-body">
+        <!-- FILL: one row per blog post — replace href, date and title -->
+        <p class="blog-row"><span class="blog-perms">-rw-r--r--</span> <span class="blog-date redacted">[DATE]</span> <a href="#" class="blog-link redacted">[BLOG POST TITLE — link to your post]</a></p>
+        <p class="blog-row"><span class="blog-perms">-rw-r--r--</span> <span class="blog-date redacted">[DATE]</span> <a href="#" class="blog-link redacted">[BLOG POST TITLE — link to your post]</a></p>
+        <p class="blog-row"><span class="blog-perms">-rw-r--r--</span> <span class="blog-date redacted">[DATE]</span> <a href="#" class="blog-link redacted">[BLOG POST TITLE — link to your post]</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="file-section">
+    <h2 class="file-header" data-decrypt>[FILE 05] skills.enc</h2>
+    <div class="terminal-window">
+      <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> ./scan_skills --verbose</div>
+      <div class="tw-body" id="skills-body">
+        <!-- FILL: edit skill names and levels (data-level: 0–100). Add/remove rows freely. -->
+        <div class="skill" data-level="85"><span class="skill-name">[SKILL — e.g. Network Security]</span><span class="skill-bar"></span><span class="skill-pct"></span></div>
+        <div class="skill" data-level="75"><span class="skill-name">[SKILL — e.g. Python]</span><span class="skill-bar"></span><span class="skill-pct"></span></div>
+        <div class="skill" data-level="70"><span class="skill-name">[SKILL — e.g. Web Exploitation]</span><span class="skill-bar"></span><span class="skill-pct"></span></div>
+        <div class="skill" data-level="65"><span class="skill-name">[SKILL — e.g. Reverse Engineering]</span><span class="skill-bar"></span><span class="skill-pct"></span></div>
+        <div class="skill" data-level="80"><span class="skill-name">[SKILL — e.g. Linux / Bash]</span><span class="skill-bar"></span><span class="skill-pct"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="file-section">
+    <h2 class="file-header" data-decrypt>[FILE 06] contact.enc</h2>
+    <div class="terminal-window">
+      <div class="tw-titlebar"><span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span> ping kushagram</div>
+      <div class="tw-body contact-body">
+        <!-- FILL: replace # with your real links -->
+        <p class="prompt-line">$ curl -s https://kushagram/contact</p>
+        <p><span class="c-key">email&nbsp;&nbsp;&nbsp;:</span> <a href="mailto:f20220436@goa.bits-pilani.ac.in">f20220436@goa.bits-pilani.ac.in</a></p>
+        <p><span class="c-key">github&nbsp;&nbsp;:</span> <a href="#" class="redacted">[github.com/your-handle]</a></p>
+        <p><span class="c-key">linkedin:</span> <a href="#" class="redacted">[linkedin.com/in/your-handle]</a></p>
+        <p><span class="c-key">tryhackme/htb:</span> <a href="#" class="redacted">[your profile]</a></p>
+        <p class="prompt-line">$ echo "let's break things (legally)"</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>— CONNECTION TERMINATED — © <span id="year"></span> kushagram · handcrafted with cathode rays & green phosphor</p>
+  </footer>
+
+</div>
+
+<!-- ============ CTF TERMINAL ============ -->
+<div id="cli" class="cli-closed" aria-label="CTF terminal">
+  <div class="cli-titlebar">
+    <span class="tw-dot"></span><span class="tw-dot"></span><span class="tw-dot"></span>
+    <span class="cli-title">guest@kushagram: ~/ctf — 3 flags hidden</span>
+    <button id="cli-close" aria-label="close terminal">✕</button>
+  </div>
+  <div id="cli-out"></div>
+  <div class="cli-input-row">
+    <label for="cli-in" id="cli-prompt">guest@ctf:~$</label>
+    <input id="cli-in" autocomplete="off" autocapitalize="off" spellcheck="false">
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
