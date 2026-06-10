@@ -39,9 +39,103 @@ function updateAchCount() {
   $("#ach-count").textContent = `🏆 ${unlocked.size}/${Object.keys(ACHIEVEMENTS).length}`;
 }
 
+/* ================= GRID HORIZON BACKGROUND ================= */
+function initGridBg() {
+  const cv = $("#bg-grid");
+  const ctx = cv.getContext("2d");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let w, h, horizon, stars = [], t = 0;
+
+  function resize() {
+    w = cv.width = innerWidth;
+    h = cv.height = innerHeight;
+    horizon = h * 0.62;
+    stars = Array.from({ length: 90 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * horizon * 0.95,
+      r: Math.random() * 1.3 + 0.3,
+      p: Math.random() * Math.PI * 2,
+    }));
+  }
+  resize();
+  addEventListener("resize", resize);
+
+  function frame() {
+    // sky: deep indigo fading down to the horizon
+    const sky = ctx.createLinearGradient(0, 0, 0, horizon);
+    sky.addColorStop(0, "#16161e");
+    sky.addColorStop(1, "#1a1b26");
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, w, horizon);
+
+    // floor
+    ctx.fillStyle = "#16161e";
+    ctx.fillRect(0, horizon, w, h - horizon);
+
+    // horizon glow
+    const glow = ctx.createRadialGradient(w / 2, horizon, 0, w / 2, horizon, w * 0.6);
+    glow.addColorStop(0, "rgba(187, 154, 247, 0.22)");
+    glow.addColorStop(0.4, "rgba(125, 207, 255, 0.08)");
+    glow.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, w, h);
+
+    // twinkling stars
+    for (const s of stars) {
+      ctx.globalAlpha = 0.35 + 0.35 * Math.sin(t * 0.02 + s.p);
+      ctx.fillStyle = Math.random() < 0.02 ? "#bb9af7" : "#c0caf5";
+      ctx.fillRect(s.x, s.y, s.r, s.r);
+    }
+    ctx.globalAlpha = 1;
+
+    // horizontal grid lines scrolling toward the viewer
+    const scroll = (t * 0.012) % 1;
+    const ROWS = 14;
+    for (let i = 0; i <= ROWS; i++) {
+      const p = (i + scroll) / ROWS;          // 0 at horizon, 1 at bottom
+      const y = horizon + (h - horizon) * p * p; // quadratic spacing = perspective
+      ctx.strokeStyle = `rgba(125, 207, 255, ${0.05 + p * 0.28})`;
+      ctx.lineWidth = 1 + p;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(w, y);
+      ctx.stroke();
+    }
+
+    // vertical lines converging on the vanishing point
+    const cx = w / 2, COLS = 22, spread = w * 1.6;
+    for (let i = -COLS; i <= COLS; i++) {
+      const a = 0.28 * (1 - Math.abs(i) / (COLS + 2));
+      ctx.strokeStyle = `rgba(187, 154, 247, ${a})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(cx + i * 6, horizon);
+      ctx.lineTo(cx + (i / COLS) * spread, h);
+      ctx.stroke();
+    }
+
+    // horizon line itself
+    ctx.strokeStyle = "rgba(247, 118, 142, 0.5)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(0, horizon);
+    ctx.lineTo(w, horizon);
+    ctx.stroke();
+
+    t++;
+    if (!reduced && !document.hidden) requestAnimationFrame(frame);
+  }
+
+  if (reduced) { t = 1; frame(); return; } // single static frame
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) requestAnimationFrame(frame);
+  });
+  requestAnimationFrame(frame);
+}
+
 /* ================= BOOT SEQUENCE ================= */
 const BOOT_LINES = [
-  { t: "KUSHAGRAM BIOS v1.337 — PHOSPHOR EDITION", d: 300 },
+  { t: "KUSHAGRAM BIOS v1.337 — TOKYO NIGHT EDITION", d: 300 },
   { t: "Copyright (C) 1995-2026, KGRAM Industries", d: 200 },
   { t: "", d: 150 },
   { t: "CPU ........................ 486DX2 @ 66MHz [OVERCLOCKED]", d: 120 },
@@ -227,13 +321,15 @@ function toggleMatrix() {
   const fs = 16, cols = Math.floor(cv.width / fs);
   const drops = Array(cols).fill(1);
   const glyphs = "アァカサタナハマヤラ0123456789ABCDEF$#@";
+  const palette = ["#7dcfff", "#bb9af7", "#9ece6a", "#f7768e", "#7aa2f7"];
+  const colColor = Array.from({ length: cols }, () => palette[Math.floor(Math.random() * palette.length)]);
 
   matrixTimer = setInterval(() => {
-    ctx.fillStyle = "rgba(5, 8, 5, 0.08)";
+    ctx.fillStyle = "rgba(22, 22, 30, 0.08)";
     ctx.fillRect(0, 0, cv.width, cv.height);
-    ctx.fillStyle = "#00ff41";
     ctx.font = fs + "px monospace";
     drops.forEach((y, i) => {
+      ctx.fillStyle = colColor[i];
       ctx.fillText(glyphs[Math.floor(Math.random() * glyphs.length)], i * fs, y * fs);
       drops[i] = (y * fs > cv.height && Math.random() > 0.975) ? 0 : y + 1;
     });
@@ -241,8 +337,8 @@ function toggleMatrix() {
 }
 
 /* ================= CONSOLE EASTER EGG ================= */
-console.log("%c>> ACCESS LOG: you opened the console. respect. <<", "color:#00ff41;background:#000;font-size:14px;padding:4px 8px;");
-console.log("%cTry the Konami code on the page: ↑↑↓↓←→←→BA", "color:#ffb000;");
+console.log("%c>> ACCESS LOG: you opened the console. respect. <<", "color:#7dcfff;background:#16161e;font-size:14px;padding:4px 8px;border-radius:4px;");
+console.log("%cTry the Konami code on the page: ↑↑↓↓←→←→BA", "color:#bb9af7;");
 
 /* ============================================================
    CTF TERMINAL — mini challenges
@@ -491,5 +587,6 @@ function initCli() {
 }
 
 /* ================= GO ================= */
+initGridBg();
 initCli();
 runBoot();
