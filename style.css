@@ -159,7 +159,19 @@ a:hover { color: var(--amber); text-shadow: 0 0 8px rgba(255, 176, 0, .8); }
   cursor: pointer;
   user-select: none;
 }
-#ascii-name.glitch { animation: glitch .25s steps(2) 3; }
+#ascii-name-mobile {
+  display: none;
+  font-family: var(--font-big);
+  font-weight: normal;
+  font-size: clamp(40px, 13vw, 64px);
+  letter-spacing: 3px;
+  color: var(--green);
+  text-shadow: var(--glow);
+  cursor: pointer;
+  user-select: none;
+}
+.only-mobile { display: none; }
+#ascii-name.glitch, #ascii-name-mobile.glitch { animation: glitch .25s steps(2) 3; }
 @keyframes glitch {
   0%   { transform: translate(0); text-shadow: var(--glow); }
   25%  { transform: translate(-4px, 2px); text-shadow: 4px 0 var(--red), -4px 0 #00eaff; }
@@ -358,9 +370,58 @@ kbd {
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 640px) {
-  #statusbar { font-size: 12px; padding: 6px 10px; }
+
+  /* status bar: single row, swipeable nav, no clutter */
+  #statusbar { font-size: 13px; padding: 8px 12px; gap: 10px; }
   .sb-left { display: none; }
-  .skill { grid-template-columns: 1fr; gap: 4px; }
-  .skill-pct { text-align: left; }
+  .sb-nav {
+    flex: 1;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 14px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sb-nav::-webkit-scrollbar { display: none; }
+  .sb-nav a { white-space: nowrap; }
+  #clock, .sb-sep { display: none; }
+
+  /* hero: big readable wordmark instead of microscopic ASCII art */
+  #site { padding: 60px 14px 30px; }
+  #hero { padding: 6vh 0 4vh; }
+  #ascii-name { display: none; }
+  #ascii-name-mobile { display: block; }
+  .only-desktop { display: none; }
+  .only-mobile { display: inline; }
+  .hero-hint { font-size: 13px; }
+
+  /* sections: tighter rhythm, shorter decrypted suffix */
+  .file-section { margin: 52px 0; }
+  .file-header { font-size: 22px; }
+  .file-header::after { content: " .. DECRYPTED"; }
+  .tw-body { padding: 14px 12px; }
+
+  /* experience + skills + blogs */
   .xp-dates { margin-left: 0; }
+  .skill { grid-template-columns: 1fr; gap: 4px; margin: 16px 0; }
+  .skill-pct { text-align: left; }
+  .blog-perms { display: none; }
+  .blog-row { font-size: 14px; }
+
+  /* toasts: don't overflow the screen */
+  #toasts { left: 12px; right: 12px; bottom: 12px; align-items: flex-end; }
+  .toast { font-size: 17px; max-width: 100%; }
+
+  /* CTF terminal: full-width bottom sheet */
+  #cli {
+    right: 0; bottom: 0;
+    width: 100vw;
+    height: 70vh;
+    border-left: none; border-right: none; border-bottom: none;
+  }
+  #cli.cli-closed { transform: translateY(100%); }
+  /* 16px input prevents iOS from auto-zooming on focus */
+  #cli-in { font-size: 16px; }
+  #cli-out { font-size: 13px; }
+  .cli-title { font-size: 11px; }
 }

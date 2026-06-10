@@ -192,14 +192,15 @@ function initSite() {
     if (es.some((e) => e.isIntersecting)) { unlock("deep"); o.disconnect(); }
   }).observe($("footer"));
 
-  // glitch: click the ASCII name 5 times
+  // glitch: click/tap the name 5 times (desktop ASCII art or mobile wordmark)
   let clicks = 0;
-  $("#ascii-name").addEventListener("click", (e) => {
-    e.target.classList.remove("glitch");
-    void e.target.offsetWidth; // restart animation
-    e.target.classList.add("glitch");
-    if (++clicks >= 5) unlock("glitch");
-  });
+  $$("#ascii-name, #ascii-name-mobile").forEach((el) =>
+    el.addEventListener("click", () => {
+      el.classList.remove("glitch");
+      void el.offsetWidth; // restart animation
+      el.classList.add("glitch");
+      if (++clicks >= 5) unlock("glitch");
+    }));
 
   // handshake: open any contact link
   $$("#contact a").forEach((a) =>
